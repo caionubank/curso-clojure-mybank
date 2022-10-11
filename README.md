@@ -8,6 +8,6 @@ Projeto Modelo para Curso Clojure Aplicado a Vida Real
 
 - [x] 1 - Tratamento de conta inválida/inexistente no deposito. Retornar o status http de erro e mensagem no body.
 
-- [ ] 2 - Implementar funcionalidade saque
+- [x] 2 - Implementar funcionalidade saque
 
-- [ ] 3 - Criar reset do servidor (tenta stop e tenta start) e demonstrar no mesmo repl antes e depois do tratamento de erro no ex. 1
+- [x] 3 - Criar reset do servidor (tenta stop e tenta start) e demonstrar no mesmo repl antes e depois do tratamento de erro no ex. 1

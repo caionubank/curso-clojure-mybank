@@ -13,12 +13,12 @@
 
 
 (def insufficient-funds
-  {:status 200
+  {:status 400
    :headers {"Content-Type" "text/plain"}
    :body "Insufficient funds"})
 
 
 (def blocked-account
-  {:status 200
+  {:status 400
    :headers {"Content-Type" "text/plain"}
    :body "Blocked account"})
