@@ -6,7 +6,7 @@ Projeto Modelo para Curso Clojure Aplicado a Vida Real
 
 ### Exercicios Módulo 03 - Aula 01
 
-- [ ] 1 - Tratamento de conta inválida/inexistente no deposito. Retornar o status http de erro e mensagem no body.
+- [x] 1 - Tratamento de conta inválida/inexistente no deposito. Retornar o status http de erro e mensagem no body.
 
 - [ ] 2 - Implementar funcionalidade saque
 
