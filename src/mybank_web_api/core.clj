@@ -24,14 +24,15 @@
 
 (defn make-deposit! [request]
   (let [account-id (-> request :path-params :id keyword)
-        valor-deposito (-> request :body slurp parse-double)
+        deposit-amount (-> request :body slurp parse-double)
         account? (account-exist? account-id)
         active? (:ativo (account-id @db/contas))]
     (cond
       (not account?) ex/account-not-found
       (not active?) ex/blocked-account
+      (or (neg? deposit-amount) (= deposit-amount 0.0)) ex/invalid-amount
       :else (try
-              (swap! db/contas (fn [m] (update-in m [account-id :saldo] #(+ % valor-deposito))))
+              (swap! db/contas (fn [m] (update-in m [account-id :saldo] #(+ % deposit-amount))))
               (success-response account-id)
               (catch Exception e
                 (ex-info "Error on swap!"
@@ -50,10 +51,16 @@
       (not account?) ex/account-not-found
       (not active?) ex/blocked-account
       (< (- current-ammount withdraw-value) 0) ex/insufficient-funds
+      (or (neg? withdraw-value) (= withdraw-value 0.0)) ex/invalid-amount
       :else (try
-              (swap! @db/contas (fn [m] (update-in m [account-id :saldo] #(- % withdraw-value))))
+              (swap! db/contas (fn [m] (update-in m [account-id :saldo] #(- % withdraw-value))))
               (success-response account-id)
               (catch Exception e
                 (ex-info "Error on swap!"
                          {:message (.getMessage e)
                           :class   (.getClass e)}))))))
+
+
+(comment
+  (catch Throwable e
+    (throwable->map e)))
